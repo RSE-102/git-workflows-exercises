@@ -9,7 +9,7 @@ contains some tasks that are described in the comments of the respective `.py` f
 
 Typically, each one of you will have to make one of the already existing tests pass.
 The tests in a file can be run with `pytest`, for instance, with `python3 -m pytest FILENAME.py`.
-To run only the test you are working on, use `python3 -m pytest FILENAME.py -k TESTNAME
+To run only the test you are working on, use `python3 -m pytest FILENAME.py -k TESTNAME`.
 
 
 ## Preparation
