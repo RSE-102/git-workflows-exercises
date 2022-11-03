@@ -14,6 +14,18 @@ class Point2D:
     def y(self) -> float:
         return self._coordinates[1]
 
+    # Task A: implement __iadd__ for in-place addition with a vector
+    # Task B: implement __isub__ for in-place subtraction with a vector
+    # When you are done, remove all comments such that nothing clutters your code
+    #
+    # Possible option (note that *** is to be substituted with add or sub):
+    # def __i***__(self, v: Vector) -> Point2D:
+    #     """translate this point by a vector"
+    #     # we can reuse the +/-operator of `Vector`
+    #     self._coordinates = self._coordinates + v  # use this for addition
+    #     self._coordinates = self._coordinates - v  # use this for subtraction
+    #     return self
+
 
 def test_point_construction() -> None:
     point = Point2D(1.0, 42.0)

@@ -10,12 +10,11 @@ class Rectangle:
 
     def corner(self, i: int) -> Point2D:
         assert i < 4
-        result = Point2D(self._lower_left.x, self._lower_left.y)
-        result += Vector([
-            self._dx if self._is_idx_on_right_edge(i) else 0.0,
-            self._dy if self._is_idx_on_upper_edge(i) else 0.0
-        ])
-        return result
+        # Note: you may also reuse the += operator of Point2D you implemented in exercise 2
+        return Point2D(
+            self._lower_left.x + (self._dx if self._is_idx_on_right_edge(i) else 0.0),
+            self._lower_left.y + (self._dy if self._is_idx_on_upper_edge(i) else 0.0)
+        )
 
     @property
     def lower_left(self) -> Point2D:
@@ -26,22 +25,28 @@ class Rectangle:
         return self.corner(3)
 
     def contains(self, point: Point2D) -> bool:
-        # Task A: remove duplication by defining a function
-        #         that checks if a value is within an interval
-        #         and reuse that here.
+        # Task A: remove duplication by reusing _is_in_interval()
+        tolerance = 1e-6
         ll_px = point.x - self._lower_left.x
         ll_py = point.y - self._lower_left.y
-        return ll_px >= 0 and ll_px <= self._dx \
-            and ll_py >= 0 and ll_py <= self._dy
+        return ll_px > 0 - tolerance and ll_px < self._dx + tolerance \
+            and ll_py > 0 - tolerance and ll_py < self._dy + tolerance
 
     def _is_idx_on_upper_edge(self, i: int) -> bool:
         return i in [2, 3]
-    
+
     def _is_idx_on_right_edge(self, i: int) -> bool:
         return i in [1, 3]
 
 
-def test_rectangle_contains() -> None:
+def _is_in_interval(value: float,
+                    lower_bound: float,
+                    upper_bound: float,
+                    tolerance: float) -> bool:
+    return value > lower_bound - tolerance and value < upper_bound + tolerance
+
+
+def test_rectangle_contains_exact() -> None:
     rectangle = Rectangle(lower_left=Point2D(1.0, 2.0), dx=2.5, dy=1.5)
     for i in range(4):
         assert rectangle.contains(rectangle.corner(i))

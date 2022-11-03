@@ -32,7 +32,12 @@ def test_vector_index_access() -> None:
         vector[index] = 42.0
         assert vector[index] == 42.0
 
-        # Task A: make this test pass by ensuring that `Vector` uses a copy of the coordinates it receives in the constructor 
+        # Task A: make this test pass by ensuring that `Vector` uses a copy
+        #         of the coordinates it receives in the constructor.
+        #
+        # Possible option:
+        # def __init__(self, coordinates: List[float]) -> None:
+        #     self._coordinates = [c for c in coordinates]
         assert reference[index] != 42.0
 
 
@@ -44,5 +49,11 @@ def test_3d_vector_addition() -> None:
 
 
 def test_3d_vector_subtraction() -> None:
-    # Task B: add a test for vector subtraction
+    # Task B: add a test for vector subtraction and remove the "assert False"
+    #
+    # Possible Option:
+    # vec = Vector([1.0, 2.0, 3.0]) - Vector([0.9, 1.9, 2.9])
+    # assert isclose(vec[0], 0.1)
+    # assert isclose(vec[1], 0.1)
+    # assert isclose(vec[2], 0.1)
     assert False
