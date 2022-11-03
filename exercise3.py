@@ -46,7 +46,7 @@ def _is_in_interval(value: float,
     return value > lower_bound - tolerance and value < upper_bound + tolerance
 
 
-def test_rectangle_contains() -> None:
+def test_rectangle_contains_exact() -> None:
     rectangle = Rectangle(lower_left=Point2D(1.0, 2.0), dx=2.5, dy=1.5)
     for i in range(4):
         assert rectangle.contains(rectangle.corner(i))
