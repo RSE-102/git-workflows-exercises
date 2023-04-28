@@ -1,13 +1,14 @@
 from __future__ import annotations
 from typing import List
 from math import isclose
+import copy
 
 # Task A: see comment in function `test_vector_index_access`
 # Task B: see comment in function `test_3d_vector_subtraction`
 
 class Vector:
     def __init__(self, coordinates: List[float]) -> None:
-        self._coordinates = coordinates
+        self._coordinates = copy.deepcopy(coordinates)
 
     def __getitem__(self, i: int) -> float:
         return self._coordinates[i]
@@ -31,10 +32,12 @@ def test_vector_index_access() -> None:
         assert all(reference[i] == vector[i] for i in range(4))
         vector[index] = 42.0
         assert vector[index] == 42.0
-
-        # Task A: make this test pass by ensuring that `Vector` uses a copy of the coordinates it receives in the constructor 
+      
+         
         assert reference[index] != 42.0
-
+        reference[index] = 5.0
+        assert vector[index] != 5.0
+        assert reference[index] == 5.0
 
 def test_3d_vector_addition() -> None:
     v = Vector([1.0, 2.0, 3.0]) + Vector([1.1, 2.2, 3.3])
@@ -45,4 +48,8 @@ def test_3d_vector_addition() -> None:
 
 def test_3d_vector_subtraction() -> None:
     # Task B: add a test for vector subtraction
-    assert False
+    v = Vector([1.0, 2.0, 3.0]) - Vector([0.9, 1.0, 1.5])
+    assert isclose(v[0], 0.1)
+    assert isclose(v[1], 1.0)
+    assert isclose(v[2], 1.5)
+    
